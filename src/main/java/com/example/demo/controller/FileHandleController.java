@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.alibaba.excel.EasyExcel;
+import com.example.demo.util.DemoData;
+import com.example.demo.util.DemoDataListener;
 import com.example.demo.util.DownloadData;
 import com.example.demo.util.EasyExcelHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -23,11 +26,25 @@ import java.util.List;
 @RequestMapping("/fileHandle")
 public class FileHandleController {
 
+    // todo 文件上传：
+    //      1.文件转存 2.文件校验
     @PostMapping("/uploadExcel")
     public void uploadExcel(@RequestParam("excelFile") MultipartFile excel) throws IOException {
         log.info("start upload excel");
 
-        new EasyExcelHandler().uploadRead(excel);
+        DemoDataListener listener = new DemoDataListener();
+        // todo 1. 文件转存
+        // todo 文件保存路径
+        String filePath = "/Users/chenjie/Chen/Work/Dabai/demo/" + excel.getOriginalFilename();
+        excel.transferTo(new File(filePath));
+
+        log.info("uploadExcel to " + filePath);
+
+        // todo 2. 文件校验
+        EasyExcel.read(filePath, DemoData.class, listener).sheet().doRead();
+        System.out.println(listener.getCorrectList().size());
+        System.out.println(listener.getErrorList().size());
+
     }
 
     @GetMapping("/downloadExcel")
@@ -51,4 +68,5 @@ public class FileHandleController {
         }
         EasyExcel.write(response.getOutputStream(), DownloadData.class).sheet("测试数据").doWrite(list);
     }
+
 }

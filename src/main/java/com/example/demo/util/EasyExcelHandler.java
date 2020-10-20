@@ -19,7 +19,6 @@ public class EasyExcelHandler {
 
     public void uploadRead(MultipartFile excel) throws IOException {
         log.info("get excel, start upload");
-        EasyExcel.read(excel.getInputStream(), DemoData.class, new DemoDataListener()).sheet().doRead();
     }
 
     public static void simpleWrite() {
