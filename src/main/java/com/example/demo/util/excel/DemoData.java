@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.util.excel;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;

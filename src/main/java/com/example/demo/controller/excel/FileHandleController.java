@@ -1,10 +1,9 @@
-package com.example.demo.controller;
+package com.example.demo.controller.excel;
 
 import com.alibaba.excel.EasyExcel;
-import com.example.demo.util.DemoData;
-import com.example.demo.util.DemoDataListener;
-import com.example.demo.util.DownloadData;
-import com.example.demo.util.EasyExcelHandler;
+import com.example.demo.util.excel.DemoData;
+import com.example.demo.util.excel.DemoDataListener;
+import com.example.demo.util.excel.DownloadData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
